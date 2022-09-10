@@ -70,7 +70,7 @@ exports.changePassword = async (req, res) => {
 
         const { password } = req.body;
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, "MySecretKey");
         const user = await User.findOne({ _id: decoded.id });
         if (!user) {
             throw new Error("Invalid Token");
@@ -91,7 +91,7 @@ exports.isAuthenticated = async (req, res, next) => {
         }
         
         const token = req.headers.authorization.split(" ")[1];
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token,"MySecretKey" );
         const user = await User.findOne({ _id: decoded.id });
         if (!user) {
             throw new Error("Invalid Token");

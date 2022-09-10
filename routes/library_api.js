@@ -3,22 +3,6 @@ const express = require('express');
 const router = express.Router();
 const libraryController = require('../controllers/library');
 
-
-/**
- * @swagger
- * /api/v1/library/totalbooks:
- *  get:
- *      summary: Get total number of books in library
- *      tags: [Library API's]
- *      description: Returns the count of all Books in the Library
- *      responses:
- *        '200':
- *             description: A successful response
- *        '500':
- *            description: Internal Server Error
- * 
- * 
- */
 router.route('/totalbooks').get(libraryController.getAllBooksCount);
 router.route('/addbook').post(libraryController.addBook);
 router.route('/updatebook').put(libraryController.updateBook);
