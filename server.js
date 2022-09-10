@@ -11,32 +11,15 @@ const Book = require('./models/library');
 const dummyBooks = require('./utils/booksDummyData');
 const authRoutes = require('./routes/auth');
 const { isAuthenticated } = require('./controllers/auth');
-
+const swaggerDocumentation = require('./src/helpers/documentation');
 const swaggerUI = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-
-const options = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "A2D Library API",
-            version: "1.0.0",
-            description: "Always Towards Dreams Library API",
-        },
-        servers: [
-            {
-                url: "http://localhost:5000",
-            }
-        ],
-        
-    },
-    apis: ["./routes/*.js"], 
-}
 
 
-const specs = swaggerJsDoc(options);
 dotEnv.config();
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
+app.use("/documentations", swaggerUI.serve);
+app.use("/documentations", swaggerUI.setup(swaggerDocumentation));
+
 app.use(cors());
 app.use(express.json());    // for parsing application/json data
 app.use(express.urlencoded({ extended: true }));    // for parsing application/x-www-form-urlencoded data
