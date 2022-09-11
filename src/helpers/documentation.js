@@ -256,6 +256,26 @@ const swaggerDocumentation = {
                 description: 'Get all books in the library',
                 operationId: 'getAllBooks',
                 security: security,
+                parameters: [
+                    {
+                        name: 'page',
+                        in: 'query',
+                        description: 'Page number',
+                        required: true,
+                        schema: {
+                            type: 'integer',
+                        },
+                    },
+                    {
+                        name: 'limit',
+                        in: 'query',
+                        description: 'Limit of books per page',
+                        required: true,
+                        schema: {
+                            type: 'integer',
+                        },
+                    },
+                ],
                 responses: responses,
             }
         },
