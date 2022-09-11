@@ -2,25 +2,10 @@ const Book = require('../models/library');
 
 exports.getAllBooksCount = async (_, res) => {
     try {
-        // with pagination
-        const { page, limit } = req.query;
-        const startIndex = (page - 1) * limit;
-        const endIndex = page * limit;
-        const results = {};
-        if (endIndex < await Book.countDocuments().exec()) {
-            results.next = {
-                page: page + 1,
-                limit: limit,
-            };
-        }
-        if (startIndex > 0) {
-            results.previous = {
-                page: page - 1,
-                limit: limit,
-            };
-        }
-        results.results = await Book.find().limit(limit).skip(startIndex).exec();
-        res.status(200).json({ status: "Ok", results: results });
+        // get the count using estimatedDocumentCount() method
+        const count = await Book.estimatedDocumentCount();
+        res.status(200).json({ status: "Ok", count: count });
+        
     } catch (error) {
         res.status(500).json({ status: "Error", message: "Internal Server Error" });
     }

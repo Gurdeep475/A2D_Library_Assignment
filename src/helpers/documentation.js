@@ -1,6 +1,6 @@
 const responses = {
     200: {
-        description: 'Password changed successfully',
+        description: 'Successfull Response',
     },
     400: {
         description: 'Bad Request',
